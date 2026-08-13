@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+  color: #1c1917;
+}
+
+/* Arrière-plan fixe Divine Miséricorde avec voile blanc transparent */
+.bg-jesus {
+  background-image: url('/jesus_bg.png');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+/* Le voile blanc transparent */
+.bg-jesus::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.85); /* Voile blanc transparent */
+  z-index: 1;
+}
+
+/* S'assurer que le contenu passe au-dessus du voile */
+.bg-jesus > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Style sobre, priant et accessible */
+button {
+  transition: all 0.2s ease-in-out;
+}
+
+button:active {
+  transform: scale(0.98);
+}
