@@ -1,6 +1,12 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-bleu-pale: #93c5fd;
+  --color-bleu-primary: #3b82f6;
+  --color-rouge-profond: #991b1b;
+  --color-rouge-primary: #dc2626;
+  --color-blanc-casse: #fafaf9;
+}
 
 html, body, #root {
   margin: 0;
