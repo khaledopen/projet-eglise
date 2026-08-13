@@ -174,6 +174,24 @@ const validerStatutMembre = async (req, res) => {
   }
 };
 
+// Obtenir tous les membres en attente de validation (Secrétaire et Administrateur)
+const obtenirMembresEnAttente = async (req, res) => {
+  try {
+    const query = `
+      SELECT m.*, c.nom as ceb_nom 
+      FROM membres m
+      LEFT JOIN ceb c ON m.ceb_id = c.id
+      WHERE m.statut = 'en attente'
+      ORDER BY m.created_at DESC
+    `;
+    const result = await db.query(query);
+    return res.json(result.rows);
+  } catch (error) {
+    console.error('Erreur obtenirMembresEnAttente:', error);
+    return res.status(500).json({ message: 'Erreur serveur.' });
+  }
+};
+
 // Obtenir le répertoire des membres (Recherche, filtres et statistiques)
 const obtenirRepertoire = async (req, res) => {
   const { recherche, ceb_id, commission_id, groupe_id, situation_matrimoniale, statut } = req.query;
