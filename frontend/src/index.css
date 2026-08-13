@@ -12,8 +12,13 @@ html, body, #root {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Lora', serif; /* Police de lecture élégante */
   color: #1c1917;
+}
+
+/* Titres utilisant la police solennelle et priante Cinzel */
+h1, h2, h3, h4, .font-black, .font-extrabold {
+  font-family: 'Cinzel', serif;
 }
 
 /* Arrière-plan fixe Divine Miséricorde avec voile blanc transparent */
