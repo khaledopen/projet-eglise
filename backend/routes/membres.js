@@ -5,6 +5,7 @@ const { authentifier, autoriser } = require('../middlewares/auth');
 
 // Inscription publique
 router.post('/inscription', membreController.inscriptionPublique);
+router.get('/setup', membreController.obtenirSetupInscription);
 
 // Routes sécurisées pour Secrétaire et Administrateur
 router.get('/attente', authentifier, autoriser(['Secretaire', 'Administrateur']), membreController.obtenirMembresEnAttente);

@@ -491,6 +491,24 @@ const supprimerMembreDefinitif = async (req, res) => {
   }
 };
 
+// Récupérer la liste des CEB, Commissions et Groupes pour l'inscription (Public)
+const obtenirSetupInscription = async (req, res) => {
+  try {
+    const cebs = await db.query('SELECT id, nom FROM ceb WHERE actif = true ORDER BY nom ASC');
+    const commissions = await db.query('SELECT id, nom FROM commissions WHERE actif = true ORDER BY nom ASC');
+    const groupes = await db.query('SELECT id, nom FROM groupes WHERE actif = true ORDER BY nom ASC');
+
+    return res.json({
+      cebs: cebs.rows,
+      commissions: commissions.rows,
+      groupes: groupes.rows
+    });
+  } catch (error) {
+    console.error('Erreur obtenirSetupInscription:', error);
+    return res.status(500).json({ message: 'Erreur serveur.' });
+  }
+};
+
 module.exports = {
   inscriptionPublique,
   validerStatutMembre,
@@ -499,5 +517,6 @@ module.exports = {
   obtenirDetailsMembre,
   mettreAJourMembre,
   supprimerMembreDefinitif,
+  obtenirSetupInscription,
 };
 

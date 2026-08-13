@@ -37,12 +37,14 @@ const Inscription = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Charger les listes de CEB, Commissions et Groupes pour alimenter les sélections
-    // (Nous utiliserons des appels non authentifiés car c'est une inscription publique)
     const chargerDonneesOptionnelles = async () => {
       try {
-        const resCeb = await axios.get('http://localhost:5000/api/auth/me'); // juste pour tester l'URL ou mocker si besoin.
-        // Sinon pour cette inscription publique, nous chargeons des valeurs par défaut pour éviter de casser le flux si la DB n'est pas connectée.
+        const res = await axios.get('http://localhost:5000/api/membres/setup');
+        setCebs(res.data.cebs);
+        setCommissions(res.data.commissions);
+        setGroupes(res.data.groupes);
+      } catch (err) {
+        console.warn('Utilisation des catalogues par défaut pour l\'inscription suite à une erreur backend.');
         setCebs([
           { id: 1, nom: 'Sainte Famille' },
           { id: 2, nom: 'Saint Jean-Baptiste' },
@@ -62,8 +64,6 @@ const Inscription = () => {
           { id: 3, nom: 'Légion de Marie' },
           { id: 4, nom: 'Modération' }
         ]);
-      } catch (err) {
-        console.warn('Utilisation des catalogues par défaut pour l\'inscription.');
       }
     };
     chargerDonneesOptionnelles();
